@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+import '../theme/app_typography.dart';
+import '../theme/severity_theme.dart';
+
+class SeverityBadge extends StatelessWidget {
+  final String severity;
+
+  const SeverityBadge({super.key, required this.severity});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = SeverityTheme.getTheme(severity);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: theme.color.withOpacity(0.15),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: theme.color.withOpacity(0.3)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(theme.icon, color: theme.color, size: 16),
+          const SizedBox(width: 8),
+          Text(
+            theme.label,
+            style: AppTypography.code.copyWith(
+              color: theme.color,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
